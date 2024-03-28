@@ -1,0 +1,273 @@
+
+\documentclass[11pt, sakura, night, 1in]{hw}
+
+\def\course{MAT159: Analysis II}
+\def\headername{Term Test 2 Problems}
+\def\name{Joseph Siu}
+\def\email{joseph.siu@mail.utoronto.ca}
+\def\info{Good luck!}
+\def\logo{clsfiles/qunwang.png}
+
+\begin{document}
+
+\coverpage[clsfiles/stars]
+
+\section{Riemann Sums}
+
+\newq{1}{
+    $f(x),\vph(x)\in\cal{C}^{(1)}[a,b]$. Prove that\[\lim_{\max|\De x_i|\to0}\sum_{i=1}^n f(\xi_i)\vph(\th_i)\De x_i=\int_a^b f(x)\cd\vph(x)\D x,\]
+
+    where $x_{i-1}\le \xi_i\le x_i,\; x_{i-1} \le \th_i \le x_i \; (i=1,\cdots n),$ and $\De x_i=x_i-x_{i-1} (x_0=a,x_n=b)$.
+}
+
+\newp{
+    Fix partition $\Ga$. Let $M$ be the upper bound of $|f|$ on $[a,b]$, let $\om_i$ be the oscillation of $\vph$ on $[x_{i-1}, x_n]$ of $\Ga$, then we have 
+    \begin{align*}
+        0\le\abs{\sum_{i=1}^n f(\xi_i)\vph(\th_i)\De x_i - \sum_{i=1}^n f(\xi_i)\vph(\xi_i)\De x_i} &\le \sum_{i=1}^n |f(\xi_i)|\cd|\vph(\th_i)-\vph(\xi_i)|\De x_i \\
+        &\le M\sum_{i=1}^n \om_i\De x_i \to 0.
+    \end{align*}
+
+    Here as $\norm{\Ga}\to0$, since $\vph$ is integrable, by squeeze theorem we have the differences of the sums go to 0, which proves the statement.
+}
+
+\newq{2}{
+    Let $f(x)\in\cal{C}^{(1)}[a,b]$, 
+    
+    \[\De_n=\int_a^b f(x)\D x - \frac{b-a}{n}\sum_{i=1}^n f\bra{a+k\frac{b-a}{n}},\] 
+    
+    find $\lim_{n\to\infty}n\De_n$.
+}
+
+\newp{
+    We partition $[a,b]$ equally, and mark $x_k=a+k\frac{b-a}{n}$, $k=0,1,\cdots,n$. Then we have $\De x_k=\frac{b-a}{n} (k=1,\cdots,n)$. Now, split $n\De_n$:
+    \begin{align*}
+        n\De n &= n\bra{\int_a^b f(x)\D x - \frac{b-a}{n}\sum_{k=1}^n f(x_k)}\\
+        &=n\bra{\sum_{k=1}^n \int_{x_{k-1}}^{x_k} \sqrbra{f(x)-f(x_k)}\D x}\\
+        \alt{By MVT, we have $f(x)-f(x_k)=f'(\xi_k)(x-x_k)$ for some $\xi_k\in[x_{k-1},x_k]$, thus we have}
+        &= n\bra{\sum_{k=1}^n \int_{k-1}^k f'(\xi_k)(x-x_k)\D x}\\
+        \alt{Let $m_k$ and $M_k$ be the minimum and maximum of $f'(x)$ on $[x_{k-1},x_k]$, then we have}
+        n\sum_{k=1}^n m_k\int_{k-1}^k (x-x_k)\D x \le n\De_n &= n\bra{\sum_{k=1}^n\int_{x_{k-1}}^{x_k} f'(\xi_k)(x-x_k)\D x} \\
+        &\le n\sum_{k=1}^n M_k\int_{x_{k-1}}^{x_k} (x-x_k)\D x.
+    \end{align*}
+
+    So, for $k=1,\cdots, n$ we have\footnote{Here we have $x_k-x$ instead of $x-x_k$ so we take out -1 from the integral to get the new inequality} \[\int_{x_{k-1}}^{x_k}(x_k-x)\D x = \frac12(\De x_k)^2 =\frac{b-a}{2n}\De x_k,\] which gives the inequality \[-\frac{b-a}{2}\sum_{k=1}^n m_k \De x_k\le n\De_n\le -\frac{b-a}{2}\sum_{k=1}^n M_k\De x_k.\] Now take limit to infinity and we have \[-\frac{b-a}{2}\int_a^b f'(x)\D x\le \lim_{n\to\infty} n\De_n\le -\frac{b-a}{2}\int_a^b f'(x)\D x\] Finally, we get \[\lim_{n\to\infty} n\De_n = -\frac{b-a}{2}\int_a^b f'(x)\D x=-\frac{b-a}{2}[f(b)-f(a)].\]
+}
+
+\newq{3}{
+    Let $f(x)\in\frak{R}[a,b]$, and \[f_n(x)=\sup f(x) \;\; (x_{i-1} \le x < x_i, \; i=1,\cdots, n),\] where $x+i=a+\frac{i}{n}(b-a) (i=0,1,\cdots,n; n=1,2,\cdots)$. Prove: \[\lim_{n\to\infty}\int_a^b f_n(x)\D x = \int_a^b f(x)\D x.\]
+}
+
+\newp{
+    Let $\om_i$ be the oscillation of $f$ on $[x_{i-1},x_i]$, then we have
+    \begin{align*}
+        \abs{\int_a^b f_n(x)\D x - \int_a^b f(x)\D x} &\le \sum_{i=1}^n\int_{x_{i-1}}^{x_i} |f_n(x)-f(x)|\D x\\
+        &\le \sum_{i=1}^n \om_i \De x_i\to0\\
+    \end{align*}
+    So, since $f$ is integrable on $[a,b]$ we know the summation of oscillations go to 0, therefore the statement is proved.
+}
+
+\newq{4}{
+    Prove that if $f(x)\in\frak{R}[a,b]$, then there exists a continuous function sequence $\vph_n(x)\; (n=1,2,\cdots)$ such that when $a\le c\le b$ we have \[\int_a^c f(x)\D x =\lim_{n\to\infty}\int_a^c \vph_n(x)\D x.\]
+}
+
+\newp{
+    Partition $[a,b]$ to n intervals, let $x_i=a+\frac{i}{n}(b-a)$, $i=0, 1, \cdots, n$. Define \[\vph_n(x)=f(x_{i-1})+\frac{x-x_{i-1}}{x_i-x_{i-1}}[f(x_i)-f(x_{i-1})], x_{i-1}\le x\le x_i.\] Here $f(x_{i-1})$ is the left point of $\vph_n(x)$, $\frac{f(x_i)-f(x_{i-1})}{x_i-x_{i-1}}$ is the slope of the line, and $x-x_{i-1}$ is the distance from $x_{i-1}$. (that is, we are constructing a line passing through the left and right end points of each $i$ intervals)
+
+    Then, we have \begin{align*}
+        \abs{\int_a^c \vph_n(x)\D x - \int_a^c f(x)\D x} &\le \int_a^c \abs{\vph_n(x)-f(x)}\D x\\
+        &\le \int_a^b \abs{\vph_n(x)-f(x)}\D x\\
+        &\le \sum_{i=1}^n \int_{x_{i-1}}^{x_i} \abs{\vph_n(x)-f(x)}\D x\\
+        &\le \sum_{i=1}^n \om_i \De x_i\to0,
+    \end{align*}
+
+    where $\om_i$ is the oscillation of $f$ on $[x_{i-1},x_i]$. 
+
+    Therefore as $f$ is integrable on $[a,b]$, by letting $n\to \infty$ we can see the limit is 0, which proves the statement.
+}
+
+\newq{5}{
+    Let $f(x)\in\frak{R}[A,B]$, prove the function has integral continuity, that is, \[\lim_{h\to0}\int_a^b |f(x+h)-f(x)|\D x=0,\] where $[a,b]\subset (A,B)$.
+}
+
+\newp{
+    Too long (lazy) :( % P120
+}
+
+\newq{5.1}{
+    Compute \[\int_0^\pi \ln(1-2\al\cos x+\al^2)\D x,\] where consider 2 cases:
+    \begin{enumerate}
+        \item $|\al|<1$,
+        \item $|\al|>1$.
+    \end{enumerate}
+}
+
+\newp{
+    To hard (trivial). % P113
+}
+
+\section{Riemann Integrity}
+
+\newq{6}{
+    Prove that if $f(x)\in\frak{R}[a,b]$ and is bounded, then $|f(x)|\in\frak{R}[a,b]$. Moreover, \[\abs{\int_a^b f(x)\D x}\le\int_a^b|f(x)|\D x.\]
+}
+
+\newp{
+    Since all continuous points of $f$ are also continuous points of $|f|$, thus by Lebesgue Theorem $|f|$ is integrable. Moreover,
+    \begin{align*}
+        \abs{\sum_{i=1}^n f(\xi_i)\De x_i} &\le \sum_{i=1}^n |f(\xi_i)|\De x_i\\
+    \end{align*}
+
+    Take the limit and we have \[\abs{\int_a^b f(x)\D x}\le\int_a^b|f(x)|\D x.\]
+}
+
+\newq{7}{
+    Let $f(x)\in\frak{R}[a,b]$, prove that \[\int_a^b f^2(x)\D x=0\] holds if and only if $f\is0$ almost everywhere. That is, at all continuous points $x\in[a,b]$ we have $f(x)=0$.
+}
+
+\newp{
+    For the forward direction, to obtain a contradiction assume there exists a continuous point $x_0$ such that $f(x_0)\neq0$. Since $x_0$ is continuous, this implies there exists a delta such that for all $x\in(x_0-\de,x_0+\de)$ we have $f(x)\neq0$. Thus, for all partition if we refine such interval into the partition, then since all terms are non-zero, and there exists a positive term, the sum of squares will be strictly positive, which contradicts the integral being 0 (And we assumed that $x_0$ produces a fixed value $f(x_0)$).
+
+    For the backward impication, for all partitions, we choose the marked points to be the continuous points of $f$. Then, since the discontinuous points form a null set, we can always make the sum of the intervals containing all such points to be less than epsilon, which gives a summation $0+\ep$ for all $\ep>0$, which shows the limit is 0.
+}
+
+\newq[Homework Question]{8}{
+    \begin{enumerate}
+        \item Prove that if $\vph(x)\in\cal{C}[a,b]$ and $f(x)\in\frak{R}[a,b]$ such that when $a\le x\le b$ we have $A\le f(x)\le B$. Prove that $\vph(f(x))\in\frak{R}[a,b]$.
+        \item If $\vph(x),f(x)\in\frak{R}[a,b]$, is $f(\vph(x))$ also integrable?
+    \end{enumerate}
+}
+
+\newp{
+    For the first one, since all continuous points of $f$ are also continuous points of $\vph$, and so $\vph$ is also continuous almost everywhere, by Lebesgue Theorem $\vph(f(x))$ is integrable.
+
+    For the second one, let $\vph$ be the indicator function of $0$, and let $f$ to be the Thomae-Riemann function, then the composition is not integrable.
+}
+
+\section{Newton-Liebniz Formula}
+
+\newq{9}{
+    Find $\ds\int_{\sinh 1}^{\sinh 2} \frac{\D x}{\sqrt{1+x^2}}$.
+}
+
+\newp{
+    The explicite form of the primitive is easy to find:
+    \[\int_{\sinh 1}^{\sinh 2}\frac{\D x}{\sqrt{1+x^2}}=\T{arcsinh}(x)\bigg|_{\sinh 1}^{\sinh 2}=2-1=1.\]
+}
+
+\newq{10}{
+    Compute \[I(\al)=\int_0^\pi\frac{\sin^2 x}{1+2\al\cos x+\al^2}\D x.\]
+}
+
+\newp{
+    When $\al=0, \pm 1$, we can directly compute the integral to be $\frac{\pi}{2}$.
+
+    Using the trig substitution $t=\tan \frac{x}{2}$, we can transform the integral to rational... Then get a long formula, here it is: \[=-\frac{1}{2\al}\sin x +\bra{\frac12+\frac1{2\al^2}}\frac{x}{2}-\frac{|1-\al^2|}{2\al^2}\arctan\bra{\frac{|1-\al|}{|1+\al|}\tan\frac{x}{2}}+C.\]
+}
+
+\newq{11}{
+    Find this limit using definite integral: \[\lim_{n\to\infty}\sqrbra{\frac1n\sum_{k=1}^n f\bra{a+k\frac{b-a}{n}}}.\]
+}
+
+\newp{
+    Let $x_k=a+k\frac{b-a}{n}$, then $\De x_k=\frac{b-a}{n}$. Then when $f$ is integrable we have \begin{align*}
+        \lim_{n\to\infty}\sqrbra{\frac1n\sum_{k=1}^n f\bra{a+k\frac{b-a}{n}}} &= \frac{1}{b-a}\lim_{n\to\infty}\sqrbra{\frac{b-a}n\sum_{k=1}^n f\bra{a+k\frac{b-a}{n}}}\\
+        &= \frac{1}{b-a}\int_a^b f(x)\D x.
+    \end{align*}
+}
+
+\section{Other}
+
+\newq{a1}{
+    Find \begin{enumerate}
+        \item $\ds\DD{}{x}\int_a^b\sin t^2\D t$
+        \item $\ds\DD{}{a}\int_a^b\sin x^2\D x$
+        \item $\ds\DD{}{b}\int_a^b\sin x^2\D x$
+    \end{enumerate}
+}
+
+\newp{\hfill
+
+    \begin{enumerate}
+        \item Since the integral is a constant with respect to $x$, it is equal to $0$.
+        \item By FTC, we have it to be $-\DD{}{a}\int_b^a \sin x^2 \D x = - \sin a^2$, we plugged $a$ into the function.
+        \item Similarly, we have it to be $\sin b^2$.
+    \end{enumerate}
+}
+
+\newq{a2}{
+    Find $\ds\DD{}{x}\int_{x^2}^{x^3}\frac{\D t}{\sqrt{1+t^4}}.$
+}
+
+\newp{
+    By FTC, we have \begin{align*}
+        \ds\DD{}{x}\int_{x^2}^{x^3}\frac{\D t}{\sqrt{1+t^4}}&=\bra{\frac{1}{\sqrt{1+t^4}}}\bigg|_{x^3}\cd\DD{x^3}{x}-\bra{\frac{1}{\sqrt{1+t^4}}}\bigg|_{x^2}\cd\DD{x^2}{x}\\
+        &=\frac{3x^2}{\sqrt{1+x^{12}}} - \frac{2x}{\sqrt{1+x^8}}.
+    \end{align*}
+}
+
+\newq{a3}{
+    Let $f(x)\in\cal{C}^{(1)}[0,+\infty)$, $\ds\lim_{x\to +\infty}f(x)=A$, find \[\lim_{n\to+\infty}\int_0^1 f(nx)\D x.\]
+}
+
+\newp{
+    Let $t=nx$, then $x=\frac1n t$, $\D x=\frac1n \D t$, and when $x$ is from 0 to 1, we have $t$ is from 0 to $n$, then we have \[\lim_{n\to\infty}\int_0^1 f(nx)\D x = \lim_{n\to\infty}\frac{\int_0^n f(t)\D t}{n},\] which we may apply L'Hopital's rule and get \[\lim_{n\to\infty}\frac{\int_0^n f(t)\D t}{n}=\lim_{n\to+\infty}f(n)=A.\]
+}
+
+\newq{a3.5}{
+    Let $f(x)\in\cal{C}^{(1)}[0,+\infty)$, $\ds\lim_{x\to +\infty}f(x)=A$, find \[\lim_{x\to+\infty}\frac1x\int_0^x f(t)\D t.\]
+}
+
+\newp{
+    Same as the previous question.
+}
+
+\newq{a4}{
+    Compute $\ds\int_{-1}^1\frac{x\D x}{\sqrt{5-4x}}.$
+}
+
+\newp{
+    Let $\sqrt{5-4x}=t$, then $x=\frac14(5-t^2), \D x=-\frac12 t\D t$. Then we have \begin{align*}
+        \int \frac{x\D x}{\sqrt{5-4x}} &= \int \frac{5-t^2}{4t}\cd\bra{-\frac{t}{2}}\D t = -\frac18\int(5-t^2)\D t\\
+        &= -\frac{5}{8}(5-4x)^{\frac12} + \frac1{24}(5-4x)^{\frac32} + C.
+    \end{align*}
+
+    By Newton-Liebniz formula we have \begin{align*}
+        \int_{-1}^1\frac{x\D x}{\sqrt{5-4x}} &= \sqrbra{-\frac{5}{8}(5-4x)^{\frac12} + \frac1{24}(5-4x)^{\frac32}}\bigg|_{-1}^1\\
+        &= \frac{1}{6}.
+    \end{align*}
+}
+
+\newq{a5}{
+    Prove $\ds\lim_{n\to\infty}\int_0^{\frac{\pi}{2}}\sin^n x\D x=0.$
+}
+
+\newp{
+    Fixed $\ep>0$, take $\de=\frac{\ep}{2}$, then split the integral and we can see \begin{align*}
+        0 < \int_0^{\frac{\pi}{2}}\sin ^n x\D x &=\int_0^{\frac{\pi}{2}-\de}\sin^n x\D x + \int_{\frac{\pi}{2}-\de}^{\frac{\pi}{2}}\sin^n x\D x\\
+        \alt{Since $\sin^n x$ is monotonely increasing from $0$ to $\frac{\pi}{2}$, take the upper bound which is the right most value, times the length of the whole interval, and we get}
+        &\le \frac{\pi}{2}\sin^n\bra{\frac{\pi}{2}-\de} + \de\\
+        \alt{above for the second integral, the length is delta, and is bounded by 1.}
+        &\le \frac{\pi}{2}\cos^n x + \frac{\ep}{2}
+    \end{align*}
+
+    So, since there exists $N$ such that for all $n>N$ we have $0<\cos^n x<\frac{\ep}{2}$, we can see the limit is 0 by definition.
+}
+
+\newq{a6}{
+    Let $\vph(x),\ps(x), \vph^2(x), \ps^2(x)\in\frak{R}[a,b]$, prove that \[\curbra{\int_a^b\vph(x)\ps(x)\D x}^2\le\int_a^b\vph^2(x)\D x\int_a^b\ps^2(x)\D x.\]
+}
+
+\newp{
+    Apply Cauchy inequality to the Riemann sums and we directly get the results.
+}
+
+\newq{a7}{
+    Fix $p>0$, show \[\lim_{n\to\infty}\int_n^{n+p}\frac{\sin x}{x}\D x=0.\]
+}
+
+\newp{
+    If we treat $p$ to be a constant, then \[0\le\abs{\int_n^{n+p}\frac{\sin x}{x}\D x}\le \int_{n}^{n+p}\abs{\frac{\sin x}{x}}\D x \le \frac{p}{n}\to0.\]
+}
+
+
+\end{document}

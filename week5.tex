@@ -1,0 +1,92 @@
+% \documentclass[11pt, white, night, 1in]{alittlebear}
+
+% \def\course{MAT159: Analysis II}
+% \def\headername{Week 5 Lecture}
+% \def\name{Joseph Siu}
+
+% \extractfootnote{proposition}
+
+% \begin{document}
+
+% \coverpage[clsfiles/stars]
+
+
+% \newtbox[Review]{
+%     \begin{itemize}
+%         \item Definition of $f\in \cal{R}[a,b]$
+%         \item Criteria for $f\in\cal{R}[a,b]$:
+
+%         1) 2) 3) 4) 5)
+%         \item Proposition of $f\in\cal{R}[a,b]$
+%         \begin{itemize}
+%             \item Linearity: $\forall f,g\in\cal{R}[a,b]$. $\forall\al,\be\in\R$. $\al f +\be g\in\cal{R}[a,b]$ and $\int_{a}^{b}(\al f +\be g) = \al\int_{a}^{b}f + \be\int_{a}^{b}g$
+%         \end{itemize}
+%     \end{itemize}
+% }
+
+% \newr{
+%     Riemann integral: $\cal{R}[a,b]\stackrel{\int_a^b}{\to}\R$, $f\to\int_{a}^{b}f(x)\D x$ can be seen as a linear operator. 
+% }
+
+% \newr{
+%     If $g\in C[a,b], f\in\cal{R}[a,b]$, then $\cal{R}[a,b]\stackrel{\int_a^b\cd g\D x}{\to}\R$, $f\to\int_{a}^{b}f(x)g(x)\D x$ is a linear operator.
+
+%     \neweg{
+%         $L:\cal{R}[a,b]\to\R$ is well-defined and linear.
+%     }
+
+%     \begin{itemize}
+%         \item \underline{Composition} $g\circ f$.
+%         $$\begin{array}{c|c|c}&f\in\mathcal{C}[a,b]&f\in\mathfrak{R}[a,b]\\\hline g\in\mathcal{C}[a,b]&\T{Yes}&\T{Yes}\\\hline g\in\mathfrak{R}[a,b]&\T{No}&\T{No}\\\hline\end{array}$$
+%         \item \underline{Monotonicity}
+%     \end{itemize}
+% }
+
+% \newpp{1}{
+% For any $f,g\in\cal{R}[a,b]$, $f\leq g$ on $[a,b]$ implies $\int_{a}^{b}f\leq\int_{a}^{b}g$.
+
+% \newp{
+%     Take a sequence of\footnote{converge to the integral} marked partitions $(\Ga_n,\et)\in\Om^*[a,b]\st\norm{\Ga_n}\to0$. Now, \begin{align*}
+%         \sum_{k=0}^m f(\et_{n_k})\De x_k&\leq\sum_{k=0}^m g(\et_{n_k})\De x_k\\
+%         \xdownarrow{2} n\to\infty\quad&\quad\left\downarrow n\to\infty\right.\\
+%         \xrightarrow[n\to\infty]{}\int_{a}^{b}f(x)\D x&\leq\int_{a}^{b}g(x)\D x\xleftarrow[n\to\infty]{}
+%     \end{align*}
+% }
+% }
+
+% \newco{1}{
+%     $f\in\cal{R}[a,b],f\geq0$, then $\int_{a}^{b}f\geq0$. 
+
+%     (we compare the average as integral)
+% }
+
+% \np
+
+% \newr{
+% If $f\in\cal{R}[a,b], g\leq f$, $g$ is bounded, we cannot ensure $g$ is integrable.
+% \neweg{
+%     $f=2,g=\begin{cases}
+%         1&\T{if }x\in\Q\\
+%         0&\T{if }x\notin\Q
+%     \end{cases}$ on $[0,1]$.
+% }
+% }
+
+% \newtbox[Additivity]{
+%     Observation: If $f:\cal{R}[a,b]$, $\forall \overline{a}\leq\overline{b}\st[\overline{a},\overline{b}]\subset[a,b]$, then $f\in\cal{R}[a,b]$.
+% }
+
+% \newpp{2}{$f\in\cal{R}[a,b]$, $\forall c_1,c_2,c_3\in[a,b]$, $\int_{c_1}^{c_3}f=\int_{c_1}^{c_2}f+\int_{c_2}^{c_3}f$.
+
+% \newh{
+% We did not assume $c_1\leq c_2\leq c_3$ due to the convention $\int_b^a=-\int_a^b$.
+% }
+
+% }
+
+% lazy to type the later part... 
+
+
+
+
+% \end{document}

@@ -1,0 +1,53 @@
+\documentclass[11pt, sakura, night, 1in]{hw}
+
+\def\course{MAT159}
+\def\headername{Series Convergence Tests}
+
+\begin{document}
+
+\begin{enumerate}
+    \item \tbf{D'Alambert's Ratio Test:}
+    \indenv{
+        Assume that $\ds\lim_{n\to\infty}\frac{a_{n+1}}{a_n}=k$
+        \begin{itemize}
+            \item If $k>1$, then $\ds\sum_{n=1}^\infty a_n=\infty$.
+            \item If $k<1$, then $\ds\sum_{n=1}^\infty a_n < \infty$.
+        \end{itemize}
+    }
+    \item \tbf{Cauchy's Root Test:}
+    \indenv{
+        Assume that $\ds\lim_{n\to\infty}\sqrt[n]{a_n}=k$
+        \begin{itemize}
+            \item If $k>1$, then $\ds\sum_{n=1}^\infty a_n=\infty$.
+            \item If $k<1$, then $\ds\sum_{n=1}^\infty a_n < \infty$.
+        \end{itemize}
+    }
+    \item \tbf{Raabe's Test:}
+    \indenv{
+        Let $\ds\sum_{n=1}^\infty a_n$ be a positive series.
+
+        Assume that \(K_n := n\bra{\frac{a_n}{a_{n+1}}- 1},\) and $\ds\lim_{n\to\infty}K_n=K$. 
+
+        Then \begin{itemize}
+            \item If $K>1$, then $\ds\sum_{n=1}^\infty a_n<\infty$.
+            \item If $K<1$, then $\ds\sum_{n=1}^\infty a_n = \infty$.
+        \end{itemize}
+    }
+    \item \tbf{Kummer's Test:}
+    \indenv{
+        Given a series $\ds\sum_{n=1}^\infty a_n$. 
+
+        Let $c_n$ be positive such that $\ds\sum_{n=1}^\infty \frac{1}{c_n} = \infty$.
+
+        Define $K_n := c_n \bra{\frac{a_n}{a_{n+1}}} - c_{n+1}$.
+
+        Assume that $\ds\lim_{n\to\infty}K_n=K$.
+
+        Then \begin{itemize}
+            \item If $K>0$, then $\ds\sum_{n=1}^\infty a_n<\infty$.
+            \item If $K<0$, then $\ds\sum_{n=1}^\infty a_n = \infty$.
+        \end{itemize}
+    }
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,398 @@
+\documentclass[11pt, sakura, night, 1in]{hw}
+
+\def\course{MAT159}
+\def\headername{Week 9}
+\def\name{}
+\def\email{}
+\def\info{}
+\def\logo{}
+
+\usepackage{pgfplots}
+
+\begin{document}
+
+\section{Week 9}
+
+\tbf{Review.}
+\begin{itemize}
+    \item Positive Series
+    \item Criteria of Convergence / Divergence
+\end{itemize}
+
+\[\sum_{n=1}^\infty a_n \qquad a_n\in\R.\]
+
+\neweg{
+    \[\sum_{n=1}^\infty (-1)^n, \quad \sum_{n=1}^\infty \sin (nx).\]
+}
+
+\section{Sum of Series}
+
+\underline{\tbf{Formally}} speaking,
+
+\[\sum (a_n+b_n) = \sum a_n + \sum b_n.\]
+
+We do not care whether it diverges or not, for example, when $a_n\is 1$ and $b_n\is -1$, then both series at the right side diverges however the series at the left side converges.
+
+\tbf{Recall}.
+
+\[f^+(x)=\max (x,0) = \begin{cases}
+    x, & x\geq 0,\\
+    0, & x<0.
+\end{cases}.\]
+\begin{center}
+    
+\begin{tikzpicture}
+    \begin{axis}[
+        axis lines = middle,
+        xlabel = $x$,
+        ylabel = {$f^+(x)$},
+        ymin = -1,
+        ymax = 1,
+        xmin = -1,
+        xmax = 1,
+    ]
+    \addplot [
+        domain=-1:1, 
+        samples=100, 
+        color=red,
+    ]
+    {max(x,0)};
+    \end{axis}
+\end{tikzpicture}
+\end{center}
+
+\[f^-(x)=-\min(x,0) = \begin{cases}
+    -x, & x\geq 0,\\
+    0, & x<0.
+\end{cases}\]
+\begin{center}
+    
+\begin{tikzpicture}
+    \centering
+    \begin{axis}[
+        axis lines = middle,
+        xlabel = $x$,
+        ylabel = {$f^-(x)$},
+        ymin = -1,
+        ymax = 1,
+        xmin = -1,
+        xmax = 1,
+    ]
+    \addplot [
+        domain=-1:1, 
+        samples=100, 
+        color=red,
+    ]
+    {-min(x,0)};
+    \end{axis}
+\end{tikzpicture}
+
+\end{center}
+\begin{itemize}
+    \item $f^+(x)+f^-(x)=|x|$.
+    \item $f^+(x)-f^-(x)=x$.
+\end{itemize}
+
+\tbf{\underline{Necessary Condition.}}
+
+If $\sum_{n=1}^\infty a_n < \infty$, then $\lim_{n\to\infty} a_n = 0$.
+
+\newp{
+    Let $A_k = \sum_{n=1}^k a_n$, then $\{A_k\}_{k\in\N}$ is a Cauchy sequence, $\forall \ep>0.\exists N_0\in\N. \st \forall m_1, m_2 > N_0, |A_{m_1}-A_{m_2} < \ep$. 
+
+    In particular, take $m_1= m_2 + 1$,
+
+    \[\forall m_2 > N_0. |a_{m_2+1}|<\ep,\]
+
+    this is the statement we want. 
+}
+
+\newr{
+    This is not a sufficient condition.
+
+    For example, $\frac1n$ is going to 0 yet the summation of $\frac1n$ is going to infinity.
+
+    So we can see for arbitrary series, we have the arbitrary term going to 0 but this is not a sufficient condition.
+
+    The sufficient condition should not require individual term to go to 0, but the whole tail term to go to 0, but this is not easy to verify.
+}
+
+Let's say, we have a series $a_n$, now we are going to consider the formal sum of this series. 
+
+For every series $a_n$, we formally write it as \[\sum a_n = \sum a_n^+ - a_n^-. = \sum a_n^+ - \sum a_n^-\]
+
+to let this arithmetic to make sense, we need both the summations to converge at the right hand side.
+
+So, 
+\begin{itemize}
+    \item If $\sum a_n^+<\infty$ and $\sum a_n^- < \infty$, then $\sum a_n < \infty$.
+    \item If $\sum a_n^+<\infty$ and $\sum a_n^- < \infty$, then  $\sum |a_n | <\infty$. 
+\end{itemize}
+
+We can see if both + and - converge, the $|a_n|$ is a natural thing we want to investigate.
+
+\newd{1}{
+    Let $\sum a_n$ be a series. We say that it converges \underline{absolutely}, if $\sum_{n=1}^\infty |a_n| < \infty$.
+}
+
+So,
+
+\newt{100}{
+    Absolute convergence implies convergence.
+}
+
+\newp{
+    $a_n^+\le |a_n| = a_n^+ + a_n^-$.
+
+    We have two non-negative things.
+
+    So, if $|a_n|$ converges, and $a_n^+\ge 0$ then $a_n^+$ converges.
+
+    Similarly $a_n^- \le |a_n|$ and $|a_n|$ converges, then $a_n^-$ converges.
+
+    So, these 2 converge imply $\sum a_n^+ - a_n^-=\sum a_n^+ - \sum a_n^- < \infty$ which converges.
+}
+
+So, now we discuss a property that is very important for the eh the absolute eh convergent series.
+
+So,
+
+\newt{101}{
+    Absolute convergent series still \underline{converge} to the \underline{same number} after any rearrangement.
+}
+
+If you give me a series that is absolutely convergent, then if you change the order of the series, the result will not change.
+
+Of course, we need to define what is a rearrangement.
+
+\newd[Rearrangement]{2}{
+    Let $\si: \N\to\N$ be a bijeciton.
+
+    A rearrangement of $\sum_{n=1}^\infty a_n$ under $\si$ is the follwoing series:
+    \[\sum_{n=1}^\infty a_{\si(n)}\]
+}
+\newp{\hfill
+
+    \underline{Step 1} (simple case): Assume that 
+    \indenv{
+        $\forall n\in\N. \underline{\underline{a_n \ge 0}}$.
+
+        Define the partial sum \[B_k = \sum_{n=1}^k a_{\si(n)}\le \sum_{n=1}^{M(k)} a_n = A_{m(k)}, \quad\T{ where $M(k)=\sum_{n=1}^k \si(n)$}\], the bijection can be crazy, however we only have $k$ which is finitely many numbers.
+
+        \neweg{
+            $\si(1)=2. \si(2)=7, \si(3)=11 \quad B_k=a_2 + a_7 + a_11 < \sum_{n=1}^{20} a_n=A_{2\si}$
+        }
+
+        Since $A_{m(k)}$ is a positive series, this must be bounded by the infinite series, so \[A_{m(k)}\le\sum_{n=1}^\infty a_n.\]
+    }
+
+    Since our $k$ was arbitrary, this implies for all such sequences, \[\sum_{n=1}^\infty a_{\si(n)}\le\sum_{n=1}^\infty a_n,\] similarly (conversely) we want to show that \[\sum_{n=1}^\infty a_n\le \sum_{n=1}^\infty a_{\si(n),}\] since $\si$ is a bijection, this implies it has a inverse $\si^-$. Then $\si^-$ is also another bijection, thus trivial :) gg.
+}
+
+What we did: suppose we have a absolute convergent series, we do have the right to perform a rearrangement of the series, and the rearrangement wont change the value of the series, but this is still weak, we are claiming something much stronger than this, we are not only proving the rearrangement convergent, but not showing they converge to the same value.
+
+Let's finish this discussion by looking at this special case. \footnote{can I earase this, ok}
+
+Alright, so what can we say, sorry, let me first discuss the special case, I think this is not very useful but eh let's still take a look at.
+
+So I will talk about alternating series, so alternating  series is in the form eh (I don't know what is a best way to eh whatever)\[\sum_{n=0}^\infty (-1)^{n+1} C_n,\] where $C_n\ge 0$. 
+
+Clearly pos neg pos neg is same as neg pos neg pos, so let's just study this form which is general enough, so clearly not every series like this is going to converge. For example, if we take \[C_n=1, \quad \sum_{n=1}^\infty (-1)^{n+1}\quad\T{this guy is not going to converge}].\]
+
+\newr{
+    At least we need the single term $c_n$ goes to zero.
+
+    So, to make such series converge, we need $C_n\to 0$.
+}
+
+We just need one more condition to make this sufficient to be necessary.
+
+\newt[Leibniz]{100}{
+    If $c_n$ is decreasing (monotone non-increasing) to $0$, then \[\sum_{n=1}^\infty (-1)^{n+1} C_n <\infty\]
+    
+}
+
+The proof is too simple but let's still repeat it.
+
+\newp{
+    Let's look at \[A_k=\sum_{n=1}^k (-1)^{n+1} C_n,\] now if we look at \[A_{2k}=c_1-c_2 + c_3 - c_4 + c_5 - c_6 + \cdots + c_{2k-1} - c_{2k}\]
+
+    Clearly this is a finite summation so we can regroup then like \[A_{2k}=(c_1-c_2) +( c_3 - c_4) + (c_5 - c_6) + \cdots + (c_{2k-1} - c_{2k}),\] now each term is positive, giving the summation $A_{2k}\ge 0$. Happy? Ok, Moreover, $A_{2k}$ is increasing since each time we at just another another non-negative term e.g. $c_{2k-1}-c_{2k}$.
+
+    Now we rewrite $A_{2k}$ is another way: ayaya, \[A_{2k} =c_1 - ( c_2 - c_3) - (c_4 - c_5) \cdots - (2_{2k-2} - c_{2k-1}) - c_{2k}\le c_1,\] so my monotone convergent theorem $A_{2k}$ is monotone increasing and is bounded above by $c_1$, which shows $\lim_{k\to\infty} A_{2k} = A < \infty$, but then \[\lim_{k\to\infty } A_{2k-1} = \lim_{k\to\infty}(A_{2k} - c_{2k}) = A- 0 = A\]
+}
+
+I'm not tired so I will discuss a little bit more.
+
+Okay, example.
+
+The example is the following, \[\sum (-1)^{n+1}\frac{1}{n}=1-\frac12 + \frac13 - \frac14 + \frac15\cdots,\] we claim this is actually going to converge. Since $\frac1n$ is monotonelly decreasing to 0, so by Leibniz theorem we can claim this converges.
+
+But we will tkae a closer look to why this guy is going to converge.
+
+We first look at the positive terms
+
+\[\sum a_n^+ = 1 + \frac13 + \frac15 + \cdots\]
+
+So far so good yeah? How about the negative part, 
+
+\[\sum a_n^- = \frac12 + \frac14 + \frac16 + \frac18 + \cdots\]
+
+Term wise we can see the terms of $a_n^-$ is less than the terms of $a_n^+$, for example $1>\frac12 ...$
+
+However for $a_n^-$ we can see \[B_k = \sum_{n=1}^k a_n^- = \frac12 + \frac14 + \cdots = \frac12\bra{\sum_{n=1}^k \frac1n}\], one half of the harmonic series, thus is also going to explore.
+
+In this case the negative part and the positive part are both diverging, however the series is still converging but is not absolutely converegtn as both the positive part and the negative part are diverging. However, becasue of the order we are putting it in, it is still converging but not absolutely.
+
+So for absolute convergent the rearrangement does not matter, but for conditional convergent, the rearrangement does matter.
+
+We will take 3 minutes break, then we will see that we can rearrange conditional convergent series to make it converge to any number we want.
+
+Give a convergent series $\sum a_n$ which is \underline{not} an absolute convergent
+
+\begin{align*}
+    A_k = \sum_{n=1}^k a_n &= \sum_{n=1}^k (a_n^+ - a_n^)\\
+    &= \sum_{n=1}^k a_n^+ - \sum_{n=1}^k a_n^-\\
+    &= A_k^+ - A_k^-
+\end{align*}
+
+$\lim_{k\to\infty} A_k = A<\infty$, if $A_k^+$ is going to infinity, and $A_k$ is converging, then $A_k^-$ is also going to infinity. Namely 
+\begin{enumerate}
+    \item If $\lim_{k\to\infty} A_k^+ = \infty,$ then $\lim_{k\to\infty} A_k^- = \infty$.
+
+    by MAT157, if the first two converge, the third one also converges.
+    \item If $\lim_{k\to\infty} A_k^+<\infty$, then $\lim_{k\to\infty} A_k^-<\infty$. Then this implies $\sum_{k\to\infty} A_k^+ + A_k^- < \infty$ which shows $\sum |a_n| < \infty$, which is not possible since we assumed it is not absolute convergent.
+\end{enumerate}
+
+Now we introduce Riemann's theorem
+
+\newt[Riemann]{101}{
+    Assume that $\sum a_n < \infty,$ but not absolutely convergent. Then $\forall c\in\R\cup\{\pm\infty\}. \exists \si:\N\to\N$ which is bijective, such that \[\sum_{n=1}^\infty a_{\si(n)} = C.\]
+}
+
+Let's prove it using image, suppose this is my $c$:
+
+[insert a line segment with label c on it]
+
+\fig{img/2024-03-15-10-27-45.png}
+
+Recall:
+\begin{itemize}
+    \item $|a_n|\to0$
+    \item $a_n^+\to 0$
+    \item $a_n^-\to 0$
+\end{itemize}
+
+[lazy... to type all xd]
+
+We since both diverge, we can always choose oscillating terms such that the sum is approaching such real value.
+
+
+\section{Function Sequence and Funtion Series}
+
+
+\[D\subseteq \R \qquad f_n: F\to \R.\]
+
+We say that $f_n\to f$ \underline{\tbf{pointwisely}} if \[\forall x\in D. \forall \ep>0.\exists N_0\in\N\st\forall n> N_0. |f_n(x) - f(x) | < \ep.\] \footnote{This is for fixed $x$}
+
+We say that $f_n\to f$ \underline{\tbf{uniformly}}\footnote{This is for all $x$} if \[\forall\ep>0.\exists N_0\in\N\st\forall n>N_0. \forall x\in D. |f_n(x)-f(x)|<\ep.\]
+
+Even before all the fancy definitions came out, physicists use such concept to approximate fancy functions.
+\neweg{
+    $f_n:\R\to\R$
+
+    \[f_n(x)=1_{[n,n+1]}(x)\]
+
+    Recall.
+
+    \[D\subseteq\R\qquad 1_{D} = \begin{cases}
+        1, & x\in D,\\
+        0, & x\notin D.
+    \end{cases}\]
+}
+
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines = middle,
+    xlabel = $x$,
+    ylabel = {$f_n(x)$},
+    ytick = {0,1},
+    xtick = {0,...,5},
+    domain = 0:5,
+    samples = 200,
+    clip = false,
+    ]
+    \addplot+[mark = none, thick, jump mark left] {x >= 2 && x <= 3 ? 1 : 0};
+    \node at (axis cs:2.5,0.5) {$1$};
+    \node at (axis cs:1.5,0.5) {$0$};
+    \node at (axis cs:3.5,0.5) {$0$};
+\end{axis}
+\end{tikzpicture}
+
+We claim that this function goes to 0.
+
+$f_n\to0$ pointwisely, but not uniformly. That is, $f_n\not\to0$ uniformly
+
+This is just an idea, but how can we make it to be more rigorous.
+
+\newp{\hfill
+
+    \underline{Pointwise Convergence}.
+    \indenv{
+        By archimedean property $\forall x\in\R, \exists N_0> x$.  
+
+        $\forall n>N_0+1, |f_n(x)-0|=0<\ep$.
+    }
+
+    \underline{\crossout{Uniform Convergent}}
+    \indenv{
+        We will show the negation.
+
+        Take $\ep=\frac12$, $\forall N_0>0$, take $n=N_0+1$, take $x=N_0 +\frac{3}{2}$, so $|f_n(x)-0|=1>\frac12$.
+
+        This means we cannot expect uniform convergence.
+    }
+}
+
+\neweg{
+    \[f_n(x)=\frac{x}{1+n^2x^2}\qquad x\in\R\]
+
+    This is going to 0 pointwisely. 
+
+    \[\forall x\in\R. \T{ pick $n> $ TBA}\]
+
+    Then \[\abs{\frac{x}{1+n^2x^2}-0}=\frac{|x|}{\underbrace{1+n^2x^2}_{\ge 2n|x|}}\le \frac{|x|}{2n|x|}\]
+
+    Now we let $n>\frac{1}{2\ep}$, then \[\frac{|x|}{2n|x|}=\frac{1}{2n}<\ep.\]
+
+    We can see since our choice of $n$ does not depend on $x$, thus clearly it is uniform convergent.
+}
+
+\neweg{
+    \[f_n(x)=\frac{nx}{1+nx^2}, \qquad x\in\R\]
+
+    Intuitively speaking below is a quadratic and above is a linear, thus when n to infinity below kills top.
+
+    $f_n\to f$.
+
+    \[\forall x\in\R, \T{ take $n>$ TBA}\]
+
+    \[|f_n(x)-0|=\abs{\frac{nx}{1+n^2x^2}}< \ep\]
+
+    Now we pull out the draft paper
+    \indenv{
+        $\ep(1+n^2x^2)>n|x|$
+
+        $(\ep x^2) n^2 - n |x| + \ep > 0$
+
+        $n > \frac{|x| - (1-2\ep)|x|}{2\ep |x|^2}$
+    }
+
+    Here our $n$ depends on $x$, we cannot say it is not uniform convergent. you cannot pick a good one does not mean "I" cannot pick a good one
+}
+
+
+
+
+
+\end{document}

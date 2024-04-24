@@ -1,0 +1,313 @@
+\documentclass[11pt, cyan, night, 1in]{LatexTemplate/hw}
+
+\def\course{MAT159}
+\useclspackage{csc240}
+
+\begin{document}
+
+\section{Review}
+
+Riemann Integral. $f\in R[a,b]$
+\begin{itemize}
+    \item $[a,b]$ is a closed and bounded
+    \item $f$ is bounded on $[a,b]$
+\end{itemize}
+
+\section{Improper Integral}
+
+\begin{itemize}
+    \item Unbounded Integral
+    \item Unbounded funciton
+\end{itemize}
+
+\section{Unbounded inteval}
+\begin{itemize}
+    \item $f: [a,+\infty)$
+    \item $\forall b\in(a,+\infty), f\in R[a,b]$
+\end{itemize}
+
+If $\lim_{b\to\infty}\int_a^b f(x)\D x$ exists, then we can define \[\int_a^{+\infty}f(x)\D x:= \lim_{b\to+\infty}\int_a^bf(x)\D x.\]
+
+Similarly we can define \[\int_{-\infty}^b f(x)\D x.\]
+
+\neweg{
+    $\int_0^{+\infty}\frac{1}{1+x^2}\D x$
+
+    Then, $\forall b>0. \frac{1}{1+x^2}\in R[a,b]$
+
+    Moreover, \begin{align*}
+        \lim_{b\to+\infty}\int_0^b\frac{1}{1+x^2}\D x &= \lim_{b\to+\infty}[\arctan x]_0^b\\
+        &=\lim_{b\to+\infty} \arctan b\\
+        &=\frac{\pi}{2}
+    \end{align*}
+
+    Hence $\lim_0^{+\infty} \frac{1}{1+x^2}\D x = \frac{\pi}{2}$.
+}
+
+\newr{\hfill
+
+    \begin{itemize}
+        \item By \underline{FTC}. Rewriting $\lim_{b\to+\infty}\int_a^b f(x)\D x$ exists is equivalent of rewriting $\lim_{b\to+\infty} F(b)$ exists, where $F(b)=\int_a^b f(x)\D x$.
+        \item By \underline{Sequence / Series}, $\lim_{b\to+\infty}\int_a^b f(x)\D x$ exists is equivalent of rewriting that for all $a_n, (a_0=a)$ monotonically increasing to positive infinity, \[\sum_{n=0}^\infty\int_{a_n}^{a_{n+1}}f(x)\D x < \infty.\]
+        
+        However, if $f(x)\ge 0$, then $\exists$ is sufficient.
+    \end{itemize}
+}
+
+\neweg{
+    $\int_1^{+\infty} \frac{1}{x^\la}\D x\quad \la>0$
+
+    By FTC, $\forall b>1$, \[\int_1^b \frac{1}{x^\la}\D x = \begin{cases}
+        \frac{1}{1-\la}\cd x^{1-\la}\bigg|_1^b & \la\ne 1\\
+        \ln x\bigg|_1^b & \la=1
+    \end{cases}\]
+
+    Hence, \[\int_a^{+\infty}\frac{\D x}{x^\la}=1 \quad (\la >1),\] and is undefined when $\la\le 1$
+}
+
+\newr{
+    This is a continuous analogue of p-harmonic series
+}
+
+\neweg{
+    $\int_0^{+\infty} \cos x \D x$
+
+    By FTC, $\forall b>0$, \[\int_a^b \cos x\D x = \sin b \quad \T{ periodic},\]
+
+    Since \(\lim_{b\to+\infty}\sin b\) does \underline{\tbf{NOT}} exists, hence \(\lim_{0}^{+\infty} \cos x \D x\) is indefined.
+}
+
+\subsection{Criteria}
+
+\begin{itemize}
+    \item Cauchy Sequence Properties
+    \indenv{
+        $\int_a^{+\infty} f(x)\D x$
+
+        $\forall \ep>0. \exists A>0$ s.t. \begin{align*}
+            \forall b_1,b_2>A, &\abs{\int_a^{b_1}f(x)\D x - \int_a^{b_1} f(x)\D x} < \ep\\
+            &\equiv \abs{F(b_1)-F(b_2)}<\ep.
+        \end{align*}
+    }
+    \item Abel and Dirichlet 
+    \indenv{
+        $\int_a^{+\infty}f(x)g(x)\D x$
+
+        \underline{Combo Abel}
+        \indenv{
+            \begin{enumerate}
+                \item $\int_a^b f(x)\D x < \infty$
+                \item $g$ is monotonic and bounded
+            \end{enumerate}
+        }
+        \underline{Combo Dirichlet}
+        \indenv{
+            \begin{enumerate}
+                \item $\abs{\int_a^b f(x)\D x} < M$
+                \item $g$ monotonically decreasing to 0.
+            \end{enumerate}
+        }
+
+        \neweg{
+            $\int_1^{+\infty}\frac{\sin x}{x}\D x$
+
+            $\int_1^{+\infty}f(x) g(x)\D x$, where $f(x)=\sin x$ and $g(x)=\frac{1}{x}$.
+
+            \begin{enumerate}
+                \item $\forall b10$, $\abs{\int_1^b\sin x\D x} = \abs{1 - \cos b}\le 2$
+                \item $\frac{1}{x}$ monotonically decreasing to 0 when $x\to+\infty$.
+            \end{enumerate}
+
+            So Dirichlet works.
+        }
+    }
+\end{itemize}
+
+\newr{(Warning)\hfill
+
+    If $f\in R[a,b]$, then $|f|\in R[a,b]$. Moreover $\abs{\int_a^b f(x)\D x}\le \int_a^b \abs{f(x)}\D x$.
+
+    On the other hand, it is not true that \[\int_1^{+\infty} |f(x)|\D x <\infty \iimplies \int_1^{+\infty} f(x)\D x < +\infty,\]
+
+    (Counter)-example:
+    \[\int_1^{+\infty}\frac{|\sin x|}{x}\D x\quad\T{ is undefined}\]
+
+    \underline{Actually,} \[\abs{\sin x}\ge \sin^2 x = \frac{1-\cos 2x}{2}\]
+
+    $\int_1^{+\infty}\frac{1-\cos 2x}{2} / x \D x = \int_1^{+\infty}\frac{1-\cos 2x}{2x}\D x$
+
+    \begin{itemize}
+        \item $\int_1^{+\infty}\frac{\cos 2x}{2x}\D x <\infty$ (By Dirichlet)
+        \item $\int_1^{+\infty}\frac{1}{2x}\D x = \infty$
+    \end{itemize}
+
+    These two imply $\int_1^{+\infty}\frac{1-\cos 2x}{2x}\D x$ is undefined.
+}
+
+\section{Unbounded Functions}
+
+$f:[a,b)\to\R$ is unbounded in $[b-\et,b)$
+
+$f\in R[a,b-\et], \forall \et\in(0,b-a)$
+
+\fig{img/2024-04-08-09-58-58.png}
+
+If $\lim_{\et\to0^+}\int_a^{b-\et}f(x)\D x$ exists, then \[\int_a^b f(x)\D x :=\lim_{\et\to 0^+}\int_a^{b-\et}f(x)\D x\]
+
+Similarly \[\int_a^b f(x)\D x \quad\T{ if $f(x)$ is unbounded on $(0, a+\et)$}\]
+
+\neweg{\hfill
+
+    $\int_0^1\frac{1}{x^{\la}}\D x\quad \la>0$
+
+    $\int_{\et}^1\frac{1}{x^\la}\D x = \begin{cases}
+        \frac{x^{1-\la}}{1-\la} \bigg|_{\et}^1 & \la\ne 1\\
+        \ln x\bigg|_{\et}^1 & \la=1
+    \end{cases}$
+
+    Hence, \[\int_0^1\frac{1}{x^\la}\D x = \begin{cases}
+        \frac{1}{1-\la} & \T{ if } 0<\la<1\\
+        \T{undefined otherwise} &
+    \end{cases}\]
+
+}
+
+\newr{
+    You can often use Tyalor Expansion near the singularity.
+}
+
+
+\neweg{
+    $\int_0^1\frac{\D x}{\sqrt[3]{x\bra{e^x-e^{-x}}}}$
+
+    Let \begin{align*}
+        g(x)&=x\bra{e^x-e^{-x}}\\
+        &= x\bra{1+x+\frac{x^2}{2}-\bra{1-x+\frac{x^2}{2}}}\\
+        &= x(2x + o(x^2)) \approx 2x^2
+    \end{align*}    
+}
+
+
+
+\neweg{
+    Consider the pendulum
+
+    \fig{img/2024-04-08-10-18-49.png}
+
+    \[\int_0^{x_0}\frac{\D x}{\sqrt{\cos x - \cos x_0}}\]
+
+    $\cos x - \cos x_0 \approx -(x-x_0) \sin x_0$
+
+    $\sin x_0 \neq 0$ \quad when $0<x_0<\pi$
+
+    Hence \[\int_0^{x_0} \frac{\D x}{\sqrt{\cos x - \cos x_0}}\le C\int_0^{x_0}\frac{\D x}{\sqrt{x_0 - x}} < \infty\]
+
+
+}
+
+\newr{
+    Improper integral for both unbounded interval and unbounded function:
+
+    \fig{img/2024-04-08-10-29-48.png}
+
+    $\int{0}^{+\infty}f(x)\D x$
+
+    If we choose an $A$ that is large enough, and pass $A$ to positive infinity.
+
+    However,
+
+    \fig{img/2024-04-08-10-30-02.png}
+
+    \[\int_{-\infty}^{+\infty} f(x)\D x\]
+
+    \[\lim_{\substack{b\to+\infty\\ \tilde{b}\to-\infty}}\int_{\tilde{b}}^b f(x)\D x\]
+
+    \tbf{\underline{Warning}}. $b$ and $\tilde{b}$ are independent of each other.
+
+    \fig{img/2024-04-08-10-34-26.png}
+
+    \[\int_b^c f(x)\D x := \lim_{\et\to0}\int_b^{a-\et}f(x)\D x + \lim_{\tilde{\et}\to0}\int_{a+\tilde{\et}}^{c}f(x)\D x\]
+
+    Here $\et$ and $\tilde{\et}$ are independent of each other.
+}
+
+\neweg{
+
+    \fig{img/2024-04-08-10-36-38.png}
+
+    \begin{align*}
+        \int_{-1}^1\frac{1}{x}\D x &:= \lim_{\et\to 0}\int_{-1}^{\et}\frac{1}{x}\D x + \lim_{\tilde{\et}\to 0}\int_{\tilde{\et}}^1\frac{1}{x}\D x\\
+        &=\lim_{\et\to 0}\ln(-x)\bigg|_{-1}^{-\et}+\lim_{\tilde{\et}\to 0}\ln x\bigg|_{\tilde{\et}}^1\\
+        &=\lim_{\et\to 0}\lim_{\tilde{\et}\to 0}\ln\bra{\frac{\et}{\tilde{\et}}}\\
+        &=\infty
+    \end{align*}
+
+    But, if we force that $\et=\tilde{\et}$, then the limit exists, and is equal to 0. The above value is called the \underline{Cauchy Principle Value} of improper integral.
+
+    We should write this as \[\T{v.p.}\quad\int_{-1}^1\frac{1}{x}\D x = 0\]
+
+}
+
+\neweg{
+    \[\int_0^{+\infty}e^{-x^2}\D x = \frac{\sqrt{\pi}}{2}\]
+
+    First, it is an improper integral, and we can see the speed it goes to infinity is much slower than any polynomial reverse:
+
+    \[\lim_{x\to+\infty}\frac{e^{-x^2}}{\frac{1}{x^2}}=0\]
+
+    since $\int_1^{+\infty}\frac{1}{x^2}<\infty\iimplies \int_1^{+\infty}e^{-x^2}\D x < +\infty \iimplies \int_0^{+\infty}e^{-x^2}\D x < \infty$.
+
+    Second, FTC does not work, it is not integralble in finite terms, gg.
+
+    Lets do some preparations:
+    \[J_n:=\int_0^{\frac{\pi}{2}}\sin^n x\D x\]
+
+    Then \begin{align*}
+        J_n &= \int_0^{\frac{\pi}{2}}\sin^n x\D x\\
+        &= \int_0^{\frac{\pi}{2}}\sin^{n-1}x\D(-\cos x)\\
+        &= \sin^{n-1}x\cos x\bigg|_0^{\frac{\pi}{2}} + (n-1)\int_0^{\frac{\pi}{2}}\sin^{n-2}x\cos^2 x\D x\\
+        &=(n-1)\int_0^{\frac{\pi}{2}}\cos x \sin^{n-2}x\cd\cos x \D x\\
+        &=(n-1)\cd\bra{\int_0^{\frac{\pi}{2}}\sin^{n-2}x\D x - J_{n-2}}\\
+        &=(n-1)J_{n-2} - (n-1)J_n\\
+        J_n &= \frac{n-1}{n}J_{n-2}\\
+        J_0 &= \frac{\pi}{2}\\
+        J_1 &= 1
+        \alt{By induction,}
+        J_n &= \begin{cases}
+            \frac{(n-1)!!}{n!!}\cd\frac{\pi}{2} & n\T{ is even}\\
+            \frac{(n-1)!!}{n!!} & n\T{ is odd}
+        \end{cases}
+    \end{align*}
+
+}
+
+\section{Wallis}
+
+\newcl{1}{
+    \[\lim_{n\to\infty}\int_0^{\frac{\pi}{2}}\sin^n x\D x=0\]
+}
+
+\newp{[Fake proof]\hfill
+
+\[\lim_{n\to\infty}\int_0^{\frac{\pi}{2}}\sin^n x\D x = \int_0^{\frac{\pi}{2}}\lim_{n\to\infty} \sin^n x\D x = \int_0^{\frac{\pi}{2}}0\D x = 0\]
+
+}
+
+\newp{[Real proof]\hfill
+
+Consider \[J_{2n+1} < J_{2n} < J_{2n-1}\]
+
+i.e. \[\frac{(2n)!!}{(2n+1)!!}<\frac{(2n-1)!!}{(2n)!!}\cd\frac{\pi}{2}<\frac{(2n-2)!!}{(2n-1)!!}\]
+
+\[\lim_{n\to\infty}\bra{\frac{\pi}{2}\cd\frac{(2n-1)!!}{(2n)!!}}^2=\frac{(2n)!!}{(2n+1)!!}\cd\frac{(2n-2)!!}{(2n-1)!!}\]
+
+Which implies by Wallis formula, $\frac{\pi}{2}=\lim$...
+
+}
+
+To be finished : )
+
+
+
+
+\end{document}
